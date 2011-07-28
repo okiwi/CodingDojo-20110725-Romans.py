@@ -1,53 +1,39 @@
-import unittest
-
-class TestRomans(unittest.TestCase):
-
-	def test_return_romans_is_good(self):
-		self.assertEquals(1, romans("I"))
-		self.assertEquals(2, romans("II"))
-	
-	def test_III_is_three(self):
-		self.assertEquals(1 + 2, romans("I" + "II"))
-
-	def test_IV_is_four(self):
-		self.assertEquals(-1 + 5, romans("I" + "V"))
-
-	def test_V_is_five(self):
-		self.assertEquals(5, romans("V"))
-
-	def test_C_is_hundred(self):
-		self.assertEquals(100, romans("C"))
-
-	def test_VI_is_six(self):
-		self.assertEquals(5 + 1, romans("V" + "I"))
-
-	def test_X_is_ten(self):
-		self.assertEquals(10, romans("X"))
-
-	def test_L_is_fifty(self):
-		self.assertEquals(50, romans("L"))
-	
-	def test_IX_is_nine(self):
-		self.assertEquals(9, romans("IX"))
-
-	def test_XIV_is_fourteen(self):
-		self.assertEquals(14, romans("XIV"))
-	
-	def test_XC_is_ninety(self):
-		self.assertEquals(90, romans("XC"))
-
-	def test_XL_is_forty(self):
-		self.assertEquals(40, romans("XL"))
-		self.assertEquals(140, romans("CXL"))			
-
-	def test_wtf_is_nan(self):
-		self.assertRaises(NotRomanNumber, lambda: romans(""))
-
 class NotRomanNumber (Exception):
 	pass
-	
 
 def romans(number):
+	"""
+	>>> romans('I')
+	1
+	>>> romans('II')
+	2
+	>>> romans('III')
+	3
+	>>> romans('IV')
+	4
+	>>> romans('V')
+	5
+	>>> romans('C')
+	100
+	>>> romans('VI')
+	6
+	>>> romans('X')
+	10
+	>>> romans('L')
+	50
+	>>> romans('IX')
+	9
+	>>> romans('XIV')
+	14
+	>>> romans('XC')
+	90
+	>>> romans('XL')
+	40
+	>>> romans('')
+	Traceback (most recent call last):
+        ...
+	NotRomanNumber
+	"""
 	if not number:
 		raise NotRomanNumber()
 		
@@ -66,4 +52,7 @@ def romans(number):
 	return romans(number[0]) + romans(number[1:])
 
 
-unittest.main()
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
+    doctest.master.summarize() 
